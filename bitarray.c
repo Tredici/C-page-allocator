@@ -12,7 +12,7 @@ struct bitarray* bitarray_init(struct bitarray *barray, void *buffer, unsigned l
         return (struct bitarray*)NULL;
     }
     char *tmp = (char *)buffer;
-    for (int i = 0; i < len; i += 8)
+    for (int i = 0; i < len; ++i)
     {
         *(tmp++) = 0;
     }
