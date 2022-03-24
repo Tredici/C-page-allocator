@@ -25,6 +25,11 @@ struct bitarray* bitarray_init(struct bitarray *barray, void *buffer, unsigned l
     return barray;
 }
 
+long bitarray_size(struct bitarray *ba)
+{
+    return !ba ? -1L : ba->len;
+}
+
 static inline unsigned long pos_to_cell(unsigned long pos)
 {
     return pos/bits_per_cell;

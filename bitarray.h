@@ -20,6 +20,7 @@ struct bitarray
  * struttura associata.
  */
 struct bitarray* bitarray_init(struct bitarray *barray, void *buffer, unsigned long len);
+long bitarray_size(struct bitarray *ba);
 void bitarray_set(struct bitarray *ba, unsigned long pos);
 void bitarray_flip(struct bitarray *ba, unsigned long pos);
 void bitarray_reset(struct bitarray *ba, unsigned long pos);
