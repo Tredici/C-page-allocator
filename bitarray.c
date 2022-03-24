@@ -1,50 +1,57 @@
 #include "bitarray.h"
 
+// Cannot rely on standard libraries in OS code
+#define NULL (void*)0
+const long cell_size = sizeof(char);
+const long bits_per_cell = cell_size*8;
 
-struct bitarray bitarray_init(void *buffer, unsigned long len)
+struct bitarray* bitarray_init(struct bitarray *barray, void *buffer, unsigned long len)
 {
+    if (!barray || !buffer || !len)
+    {
+        return (struct bitarray*)NULL;
+    }
     char *tmp = (char *)buffer;
-    int i;
-    for (i = 0; i < len; i += 8)
+    for (int i = 0; i < len; i += 8)
     {
         *(tmp++) = 0;
     }
-    return (struct bitarray){
-        .len = len,
-        .buffer = (char *)buffer
-    };
+    *barray = (struct bitarray){}; //zero everything
+    barray->len = len;
+    barray->buffer = (char *)buffer;
+    return barray;
 }
 
 static inline unsigned long pos_to_cell(unsigned long pos)
 {
-    return pos/8L;
+    return pos/bits_per_cell;
 }
 
 static inline char pos_to_bit(unsigned long pos)
 {
-    return 1 << (pos%8L);
+    return 1 << (pos%bits_per_cell);
 }
 
-void bitarray_set(struct bitarray ba, unsigned long pos)
+void bitarray_set(struct bitarray *ba, unsigned long pos)
 {
-    if (pos >= ba.len)
+    if (pos >= ba->len)
     {
         return;
     }
-    ba.buffer[pos_to_cell(pos)] |= pos_to_bit(pos);
+    ba->buffer[pos_to_cell(pos)] |= pos_to_bit(pos);
 }
 
-void bitarray_unset(struct bitarray ba, unsigned long pos)
+void bitarray_unset(struct bitarray *ba, unsigned long pos)
 {
-    if (pos >= ba.len)
+    if (pos >= ba->len)
     {
         return;
     }
-    ba.buffer[pos_to_cell(pos)] &= ~pos_to_bit(pos);
+    ba->buffer[pos_to_cell(pos)] &= ~pos_to_bit(pos);
 }
 
-int bitarray_get(struct bitarray ba, unsigned long pos)
+int bitarray_get(struct bitarray *ba, unsigned long pos)
 {
-    return (pos >= ba.len) ? 0
-        : !!(ba.buffer[pos_to_cell(pos)] & pos_to_bit(pos));
+    return (pos >= ba->len) ? 0
+        : !!(ba->buffer[pos_to_cell(pos)] & pos_to_bit(pos));
 }
