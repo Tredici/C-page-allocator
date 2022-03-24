@@ -7,6 +7,10 @@
 struct bitarray
 {
     char * buffer;
+    /**
+     * It is the number of bits in the buffer,
+     * NOT the buffer length!
+     */
     unsigned long len;
 };
 

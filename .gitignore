@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# VS Code folder
+.vscode/
+
 # Test
 test/*
 !test/Makefile
