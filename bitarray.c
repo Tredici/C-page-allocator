@@ -12,7 +12,9 @@ struct bitarray* bitarray_init(struct bitarray *barray, void *buffer, unsigned l
         return (struct bitarray*)NULL;
     }
     char *tmp = (char *)buffer;
-    for (unsigned long i = 0; i < len; ++i)
+    // It's bits_per_cell because there are bits_per_cell
+    // bits in each element buffer
+    for (unsigned long i = 0; i < len; i += bits_per_cell)
     {
         *(tmp++) = 0;
     }
