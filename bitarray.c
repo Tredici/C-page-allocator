@@ -50,7 +50,7 @@ void bitarray_flip(struct bitarray *ba, unsigned long pos)
     ba->buffer[pos_to_cell(pos)] ^= pos_to_bit(pos);
 }
 
-void bitarray_unset(struct bitarray *ba, unsigned long pos)
+void bitarray_reset(struct bitarray *ba, unsigned long pos)
 {
     if (pos >= ba->len)
     {

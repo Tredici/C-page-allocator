@@ -38,7 +38,7 @@ int main(int argc, char const *argv[])
         else
         {
             // set bit on my object
-            bitarray_unset(&my_ba, bit);
+            bitarray_reset(&my_ba, bit);
             // set bit on check
             lib_ba.reset(bit);
         }
