@@ -14,3 +14,9 @@ test3_run: test3
 	./test3
 
 test3: test3.cc ../bitarray.c  ../bitarray.h
+
+
+test4_run: test4
+	./test4
+
+test4: test4.cc ../bitarray.c  ../bitarray.h ../page_allocator.c ../page_allocator.h
