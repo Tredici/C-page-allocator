@@ -10,6 +10,7 @@ test2_run: test2
 
 test2: test2.cc ../bitarray.c  ../bitarray.h
 
+
 test3_run: test3
 	./test3
 
